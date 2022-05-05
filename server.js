@@ -1,5 +1,7 @@
 const express = require('express');
 const PORT = process.env.PORT || 3001;
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 
@@ -19,8 +21,14 @@ function findById(id, dataArray) {
 // the body param here should accept the post route's req.body, and the dataArray is the array we want to add the data too.
 function createNewNote(body, dataArray) {
     const note = body;
-    console.log(dataArray);
     dataArray.push(note);
+    fs.writeFileSync(
+        // __dirname represents the directory of the file we execute the code in, and then linked ot he path to the db.json file
+        // so path.join is literally joining those two paths so that data can be sent between them
+        path.join(__dirname, './Develop/db/db.json'),
+        //
+        JSON.stringify({ data: dataArray }, null, 2)
+    );
 
     // return finished code to post route for response
     return note;
