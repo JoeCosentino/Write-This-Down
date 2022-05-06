@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const PORT = process.env.PORT || 3001;
 const fs = require('fs');
 const path = require('path');
@@ -38,7 +39,7 @@ function createNewNote(body, dataArray) {
 
 app.get('/api/notes', (req, res) => {
     let results = data;
-    // console.log(req.query);
+    console.log(results);
     res.json(results);
 });
 
@@ -64,11 +65,14 @@ app.post('/api/notes', (req, res) => {
     // add note to json file and dataArray in this function
     const note = createNewNote(req.body, data);
 
-    console.log(note);
+    // console.log(note);
     res.json(note);
 });
 
-// app.delete('/api/notes/:id', );
+app.delete('/api/notes/:id', (req, res) => {
+    const id = req.params.id;
+
+});
 
 
 app.listen(PORT, () => {
