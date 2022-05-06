@@ -9,8 +9,10 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+// css was working without this --> inquire
+app.use(express.static('public'));
 
-const { data } = require('./Develop/db/db.json');
+const { data } = require('./db/db.json');
 
 function findById(id, dataArray) {
     // console.log(dataArray);
@@ -25,7 +27,7 @@ function createNewNote(body, dataArray) {
     fs.writeFileSync(
         // __dirname represents the directory of the file we execute the code in, and then linked ot he path to the db.json file
         // so path.join is literally joining those two paths so that data can be sent between them
-        path.join(__dirname, './Develop/db/db.json'),
+        path.join(__dirname, './db/db.json'),
         //
         JSON.stringify({ data: dataArray }, null, 2)
     );
@@ -34,7 +36,7 @@ function createNewNote(body, dataArray) {
     return note;
 }
 
-app.get('/api/data', (req, res) => {
+app.get('/api/notes', (req, res) => {
     let results = data;
     // console.log(req.query);
     res.json(results);
@@ -47,17 +49,27 @@ app.get('/api/data/:id', (req, res) => {
     res.json(result);
 })
 
-app.post('/api/data', (req, res) => {
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+app.post('/api/notes', (req, res) => {
     // set id based on what the next index of the array will be
     req.body.id = data.length.toString();
 
     // add note to json file and dataArray in this function
     const note = createNewNote(req.body, data);
 
-    // req.body is where our incoming content will be
-    // console.log(note);
+    console.log(note);
     res.json(note);
 });
+
+// app.delete('/api/notes/:id', );
+
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);

@@ -1,25 +1,14 @@
 {
-  "dependencies": {
-    "express": "^4.18.1",
-    "inquirer": "^8.2.4"
-  },
-  "scripts": {
-    "start": "node server.js"
-  },
-  "name": "write-this-down",
-  "description": "",
+  "name": "note-taker",
   "version": "1.0.0",
+  "description": "",
   "main": "server.js",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JoeCosentino/Write-This-Down.git"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JoeCosentino/Write-This-Down/issues"
-  },
-  "homepage": "https://github.com/JoeCosentino/Write-This-Down#readme"
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
