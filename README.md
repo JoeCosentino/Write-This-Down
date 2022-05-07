@@ -4,7 +4,7 @@ This is a README file for the Note Taker Challenge, completed by Joe Cosentino
 ## Important Links
 
 * main repository link: https://github.com/JoeCosentino/Write-This-Down
-* active webpage link: https://joecosentino.github.io/Write-This-Down/
+* active webpage link: https://infinite-basin-84568.herokuapp.com/notes
 
 ## To Download
 
